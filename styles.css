@@ -191,6 +191,16 @@ h2 {
   color: var(--accent);
 }
 
+.about-points {
+  margin: 1.25rem 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+
+.about-points li {
+  margin-bottom: 0.75rem;
+}
+
 .about-layout {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -202,6 +212,36 @@ h2 {
   color: var(--muted);
 }
 
+.testimonials-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.testimonial-card,
+.final-cta {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.testimonial-card {
+  padding: 1.5rem;
+  color: var(--muted);
+}
+
+.testimonial-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 1rem;
+  color: var(--text);
+}
+
+.testimonial-meta span {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .contact-box {
   padding: 2rem;
   display: flex;
@@ -210,9 +250,23 @@ h2 {
   align-items: center;
 }
 
+.section-compact {
+  padding-top: 0;
+}
+
+.final-cta {
+  padding: 2rem;
+}
+
+.final-cta p:last-child {
+  color: var(--muted);
+  max-width: 62ch;
+}
+
 @media (max-width: 900px) {
   .three-up,
   .work-grid,
+  .testimonials-grid,
   .about-layout,
   .contact-box {
     grid-template-columns: 1fr;
