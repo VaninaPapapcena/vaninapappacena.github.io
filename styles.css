@@ -392,6 +392,116 @@ h3 {
   max-width: 44rem;
 }
 
+.case-page .hero {
+  padding-bottom: 2.5rem;
+}
+
+.case-backlink {
+  display: inline-flex;
+  margin-top: 1rem;
+  color: var(--accent-strong);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.case-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.case-cover {
+  width: 100%;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: block;
+}
+
+.case-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.case-summary,
+.gallery-card,
+.fact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.case-summary,
+.fact-card {
+  padding: 1.4rem;
+}
+
+.case-summary p,
+.fact-card p,
+.case-intro,
+.case-section p {
+  color: var(--muted);
+}
+
+.metric-list,
+.fact-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.metric-list li,
+.fact-list li {
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.metric-list strong,
+.fact-list strong {
+  display: block;
+  color: var(--text);
+}
+
+.case-section + .case-section {
+  margin-top: 2rem;
+}
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.gallery-card {
+  padding: 0.9rem;
+}
+
+.gallery-card img {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+}
+
+.gallery-card figcaption {
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding-top: 0.75rem;
+}
+
+.case-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
 .site-footer {
   padding: 2rem 0 2rem;
 }
@@ -444,6 +554,13 @@ h3 {
   .footer-content {
     grid-template-columns: 1fr;
     display: grid;
+  }
+
+  .case-hero,
+  .case-layout,
+  .case-grid,
+  .case-facts {
+    grid-template-columns: 1fr;
   }
 
   .footer-content {
