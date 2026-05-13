@@ -1,16 +1,16 @@
 :root {
   --bg: #0b1020;
-  --bg-alt: #11182d;
-  --bg-soft: #0f1730;
-  --surface: rgba(255, 255, 255, 0.06);
-  --surface-strong: rgba(255, 255, 255, 0.1);
-  --text: #f5f7fb;
-  --muted: #b3bfd4;
-  --accent: #8ab4ff;
-  --accent-strong: #5b8cff;
+  --bg-alt: #111a15;
+  --bg-soft: #16231b;
+  --surface: rgba(213, 227, 215, 0.08);
+  --surface-strong: rgba(213, 227, 215, 0.14);
+  --text: #f4f2ea;
+  --muted: #b8c5b7;
+  --accent: #9bb08d;
+  --accent-strong: #2c492d;
   --accent-warm: #e09f3e;
-  --border: rgba(255, 255, 255, 0.12);
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --border: rgba(213, 227, 215, 0.14);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
 }
 
 * {
@@ -24,7 +24,7 @@ html {
 body {
   margin: 0;
   font-family: "Inter", system-ui, sans-serif;
-  background: linear-gradient(180deg, #0b1020 0%, #0d1326 100%);
+  background: linear-gradient(180deg, #0f1712 0%, #131d17 100%);
   color: var(--text);
   line-height: 1.6;
 }
@@ -52,8 +52,8 @@ body {
 .hero {
   padding-bottom: 4rem;
   background:
-    radial-gradient(circle at top right, rgba(91, 140, 255, 0.22), transparent 28%),
-    radial-gradient(circle at top left, rgba(138, 180, 255, 0.14), transparent 24%);
+    radial-gradient(circle at top right, rgba(44, 73, 45, 0.34), transparent 28%),
+    radial-gradient(circle at top left, rgba(155, 176, 141, 0.16), transparent 24%);
 }
 
 .nav {
@@ -88,14 +88,14 @@ body {
   width: 100%;
   height: 100%;
   fill: none;
-  stroke: #dce6f8;
+  stroke: #d6dfd0;
   stroke-width: 0.25;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .brand-mark svg .fill {
-  fill: #dce6f8;
+  fill: #d6dfd0;
   stroke: none;
 }
 
@@ -148,7 +148,7 @@ h2 {
 .supporting-copy {
   max-width: 58ch;
   margin: 1rem 0 0;
-  color: #d8e1f1;
+  color: #d7ddd0;
 }
 
 .hero-actions,
@@ -172,12 +172,12 @@ h2 {
 
 .button.primary {
   background: var(--accent-strong);
-  color: white;
+  color: #f5f1e8;
   border-color: transparent;
 }
 
 .button.secondary {
-  background: transparent;
+  background: rgba(213, 227, 215, 0.05);
   color: var(--text);
 }
 
@@ -222,10 +222,10 @@ h2 {
 
 .intro-panel {
   padding: 1.5rem 1.75rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  background: linear-gradient(180deg, rgba(213, 227, 215, 0.08), rgba(213, 227, 215, 0.04));
   border: 1px solid var(--border);
   border-radius: 20px;
-  color: #dbe6fa;
+  color: #dde4d8;
   box-shadow: var(--shadow);
 }
 
@@ -393,7 +393,7 @@ h2 {
   padding: 1.25rem;
   border-radius: 20px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  background: linear-gradient(180deg, rgba(213, 227, 215, 0.07), rgba(213, 227, 215, 0.03));
   box-shadow: var(--shadow);
 }
 
@@ -404,7 +404,7 @@ h2 {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: rgba(138, 180, 255, 0.14);
+  background: rgba(155, 176, 141, 0.16);
   color: var(--accent);
   font-weight: 700;
   margin-bottom: 1rem;
