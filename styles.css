@@ -112,7 +112,7 @@ body {
 }
 
 .hero-content {
-  padding: 4rem 0 2rem;
+  padding: 4.5rem 0 2.5rem;
 }
 
 .eyebrow,
@@ -220,9 +220,8 @@ h3 {
 .contact-box {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 16px;
   box-shadow: var(--shadow);
-  backdrop-filter: blur(8px);
 }
 
 .highlights li {
@@ -230,25 +229,31 @@ h3 {
 }
 
 .section-tight {
-  padding-bottom: 0;
+  padding: 2.5rem 0 0;
 }
 
 .intro-panel {
-  padding: 1.5rem 1.75rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 244, 238, 0.92));
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
   color: #435140;
-  box-shadow: var(--shadow);
+  box-shadow: none;
 }
 
 .intro-panel p {
   margin: 0;
   font-size: 1.05rem;
+  max-width: 38rem;
+}
+
+.intro-minimal {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
 }
 
 .section {
-  padding: 5rem 0;
+  padding: 4.5rem 0;
 }
 
 .section-alt {
@@ -256,7 +261,7 @@ h3 {
 }
 
 .section-heading {
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .grid {
@@ -280,25 +285,18 @@ h3 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.compact-work-grid {
+  align-items: start;
+}
+
 .card,
 .work-card {
-  padding: 1.5rem;
+  padding: 1.35rem;
 }
 
-.list-card,
 .service-card,
-.offer-card,
 .faq-card {
   height: 100%;
-}
-
-.small-label {
-  margin: 1rem 0 0.5rem;
-  color: var(--accent);
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  font-weight: 700;
 }
 
 .feature-list {
@@ -314,6 +312,14 @@ h3 {
 .work-card ul {
   padding-left: 1.2rem;
   color: var(--muted);
+}
+
+.service-card p,
+.work-card p,
+.about-copy p,
+.testimonial-card p,
+.contact-box p {
+  max-width: 58ch;
 }
 
 .work-card a {
@@ -350,7 +356,7 @@ h3 {
 .final-cta {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 16px;
   box-shadow: var(--shadow);
 }
 
@@ -380,60 +386,14 @@ h3 {
   align-items: center;
 }
 
-.section-compact {
-  padding-top: 0;
-}
-
-.final-cta {
-  padding: 2rem;
-}
-
-.final-cta p:last-child {
-  color: var(--muted);
-  max-width: 62ch;
-}
-
 .section-note {
-  margin: 1.5rem 0 0;
+  margin: 1.25rem 0 0;
   color: var(--muted);
-}
-
-.process-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.process-step {
-  padding: 1.25rem;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(245, 244, 238, 0.9));
-  box-shadow: var(--shadow);
-}
-
-.process-step span {
-  display: inline-flex;
-  width: 2.25rem;
-  height: 2.25rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: rgba(111, 133, 108, 0.14);
-  color: var(--accent);
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.process-step p {
-  color: var(--muted);
-  margin: 0;
-}
-
-.faq-grid {
-  align-items: stretch;
+  max-width: 44rem;
 }
 
 .site-footer {
-  padding: 0 0 2rem;
+  padding: 2rem 0 2rem;
 }
 
 .footer-content {
@@ -480,7 +440,6 @@ h3 {
   .testimonials-grid,
   .about-layout,
   .contact-box,
-  .process-grid,
   .expanded-work-grid,
   .footer-content {
     grid-template-columns: 1fr;
