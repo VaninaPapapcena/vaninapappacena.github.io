@@ -300,15 +300,17 @@ h3 {
 }
 
 .work-showcase-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid var(--border);
-  border-radius: 0;
+  border-radius: 14px;
   overflow: hidden;
   text-decoration: none;
   color: var(--text);
-  box-shadow: none;
+  box-shadow: 0 14px 32px rgba(30, 44, 32, 0.06);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
 }
 
 .work-showcase-item img {
@@ -316,6 +318,7 @@ h3 {
   aspect-ratio: 1.15 / 1;
   object-fit: cover;
   display: block;
+  transition: transform 0.3s ease;
 }
 
 .work-showcase-item span {
@@ -325,6 +328,18 @@ h3 {
   gap: 0.75rem;
   padding: 1rem 1.1rem;
   font-size: 1.05rem;
+}
+
+.work-showcase-item:hover,
+.work-showcase-item:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(30, 44, 32, 0.1);
+  border-color: rgba(44, 73, 45, 0.22);
+}
+
+.work-showcase-item:hover img,
+.work-showcase-item:focus-visible img {
+  transform: scale(1.02);
 }
 
 .work-showcase-item span::after {
@@ -496,9 +511,10 @@ h3 {
 .archive-cta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-top: 1.5rem;
 }
 
 .archive-page .hero,
