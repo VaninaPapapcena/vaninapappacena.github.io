@@ -193,6 +193,12 @@ h3 {
   color: var(--text);
 }
 
+.text-link {
+  color: var(--accent-strong);
+  text-decoration: none;
+  font-weight: 600;
+}
+
 .button:hover,
 .button:focus-visible,
 .nav a:hover,
@@ -264,6 +270,10 @@ h3 {
   margin-bottom: 1.75rem;
 }
 
+.compact-heading {
+  margin-bottom: 1.25rem;
+}
+
 .grid {
   display: grid;
   gap: 1.25rem;
@@ -292,6 +302,24 @@ h3 {
 .card,
 .work-card {
   padding: 1.35rem;
+}
+
+.audience-grid {
+  align-items: stretch;
+}
+
+.audience-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
 .service-card,
@@ -392,8 +420,74 @@ h3 {
   max-width: 44rem;
 }
 
+.archive-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.archive-page .hero,
 .case-page .hero {
   padding-bottom: 2.5rem;
+}
+
+.page-intro {
+  padding: 3rem 0 1rem;
+}
+
+.archive-grid {
+  align-items: stretch;
+}
+
+.cv-layout {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.cv-content {
+  display: grid;
+  gap: 0;
+}
+
+.chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.timeline {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.timeline-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 1.35rem;
+}
+
+.timeline-meta {
+  margin: -0.35rem 0 1rem;
+  color: var(--muted);
 }
 
 .case-backlink {
@@ -551,7 +645,8 @@ h3 {
   .about-layout,
   .contact-box,
   .expanded-work-grid,
-  .footer-content {
+  .footer-content,
+  .cv-layout {
     grid-template-columns: 1fr;
     display: grid;
   }
@@ -561,6 +656,10 @@ h3 {
   .case-grid,
   .case-facts {
     grid-template-columns: 1fr;
+  }
+
+  .archive-cta {
+    align-items: flex-start;
   }
 
   .footer-content {
@@ -585,11 +684,14 @@ h3 {
   }
 
   .contact-actions,
-  .hero-actions {
+  .hero-actions,
+  .card-actions {
     flex-direction: column;
   }
 
-  .button {
+  .button,
+  .text-link {
     width: 100%;
+    justify-content: center;
   }
 }
