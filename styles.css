@@ -91,7 +91,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
+  font-size: 0.96rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .brand-mark {
@@ -124,6 +126,12 @@ body {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.nav a {
+  font-size: 0.96rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 .hero-content {
@@ -459,32 +467,29 @@ h3 {
   color: var(--muted);
 }
 
-.testimonials-scroller {
-  overflow-x: auto;
-  padding: 0.25rem 0 0.85rem;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(44, 73, 45, 0.28) transparent;
+.testimonials-carousel {
+  display: grid;
+  gap: 1.25rem;
 }
 
-.testimonials-scroller::-webkit-scrollbar {
-  height: 10px;
+.testimonials-viewport {
+  overflow: hidden;
+  position: relative;
 }
 
-.testimonials-scroller::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.testimonials-scroller::-webkit-scrollbar-thumb {
-  background: rgba(44, 73, 45, 0.22);
-  border-radius: 999px;
+.testimonials-viewport::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px rgba(44, 73, 45, 0.06);
+  pointer-events: none;
 }
 
 .testimonials-track {
   display: flex;
-  gap: 1.25rem;
-  width: max-content;
   align-items: stretch;
+  transition: transform 0.45s ease;
 }
 
 .testimonials-grid {
@@ -508,25 +513,77 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.5rem;
-  min-height: 17.5rem;
-  flex: 0 0 clamp(18rem, 31vw, 23rem);
+  padding: 2rem;
+  min-height: 19rem;
+  flex: 0 0 100%;
   color: var(--muted);
-  scroll-snap-align: start;
 }
 
 .testimonial-card p {
   font-style: italic;
-  font-size: 1.05rem;
+  font-size: 1.18rem;
+  line-height: 1.7;
   margin: 0;
+  max-width: 48rem;
 }
 
 .testimonial-meta {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   color: var(--text);
+}
+
+.testimonial-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.testimonial-arrow {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--accent-strong);
+  font: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.testimonial-arrow:hover,
+.testimonial-arrow:focus-visible {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(44, 73, 45, 0.24);
+  transform: translateY(-1px);
+}
+
+.testimonial-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  flex: 1;
+}
+
+.testimonial-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(44, 73, 45, 0.18);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.testimonial-dot.is-active {
+  background: var(--accent-strong);
+  transform: scale(1.15);
 }
 
 .testimonial-meta span {
@@ -800,13 +857,8 @@ h3 {
     justify-content: center;
   }
 
-  .testimonials-track {
-    width: auto;
-  }
-
   .testimonial-card {
-    flex-basis: min(24rem, calc(100vw - 3rem));
-    min-height: auto;
+    min-height: 20.5rem;
   }
 
   .archive-cta {
@@ -841,6 +893,10 @@ h3 {
 
   .nav a {
     font-size: 0.92rem;
+  }
+
+  .brand {
+    font-size: 0.94rem;
   }
 
   .highlights {
@@ -903,11 +959,21 @@ h3 {
   }
 
   .testimonial-card {
-    flex-basis: calc(100vw - 2.25rem);
+    min-height: auto;
   }
 
   .testimonial-card p {
-    font-size: 1rem;
+    font-size: 1.02rem;
+    line-height: 1.62;
+  }
+
+  .testimonial-controls {
+    gap: 0.75rem;
+  }
+
+  .testimonial-arrow {
+    width: 2.55rem;
+    height: 2.55rem;
   }
 
   .contact-actions,

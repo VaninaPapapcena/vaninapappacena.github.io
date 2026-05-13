@@ -158,51 +158,59 @@
           <div class="section-heading">
             <h2>Testimonials</h2>
           </div>
-          <div class="testimonials-scroller" data-testimonials-scroller tabindex="0" aria-label="Client testimonials">
-            <div class="testimonials-track">
-              <article class="testimonial-card">
-                <p>
-                  “After working with Vanina, we were able to establish more structured and efficient work cycles,
-                  identify critical points in our solutions, and improve the intuitiveness and accessibility of our services.”
-                </p>
-                <div class="testimonial-meta">
-                  <strong>Liliana Gulizia</strong>
-                  <span>President, Calicó</span>
-                </div>
-              </article>
+          <div class="testimonials-carousel" data-testimonials-carousel aria-label="Client testimonials">
+            <div class="testimonials-viewport">
+              <div class="testimonials-track">
+                <article class="testimonial-card">
+                  <p>
+                    “After working with Vanina, we were able to establish more structured and efficient work cycles,
+                    identify critical points in our solutions, and improve the intuitiveness and accessibility of our services.”
+                  </p>
+                  <div class="testimonial-meta">
+                    <strong>Liliana Gulizia</strong>
+                    <span>President, Calicó</span>
+                  </div>
+                </article>
 
-              <article class="testimonial-card">
-                <p>
-                  “Vanina was key in facilitating meetings, reducing pain points, and proposing processes through clear dynamics.
-                  Her synthesis and proactivity were very important in helping us achieve our objectives.”
-                </p>
-                <div class="testimonial-meta">
-                  <strong>Pablo Abramowicz</strong>
-                  <span>Co-founder, Idiot S.A.</span>
-                </div>
-              </article>
+                <article class="testimonial-card">
+                  <p>
+                    “Vanina was key in facilitating meetings, reducing pain points, and proposing processes through clear dynamics.
+                    Her synthesis and proactivity were very important in helping us achieve our objectives.”
+                  </p>
+                  <div class="testimonial-meta">
+                    <strong>Pablo Abramowicz</strong>
+                    <span>Co-founder, Idiot S.A.</span>
+                  </div>
+                </article>
 
-              <article class="testimonial-card">
-                <p>
-                  “Vanina brings strong systematization, documentation, creativity, empathy, and professionalism.
-                  She is deeply committed to understanding the organizations she supports and always adds value.”
-                </p>
-                <div class="testimonial-meta">
-                  <strong>Florencia Castagnino, Santiago Lombardi, Ernesto Kern</strong>
-                  <span>Co-founders, Bleett</span>
-                </div>
-              </article>
+                <article class="testimonial-card">
+                  <p>
+                    “Vanina brings strong systematization, documentation, creativity, empathy, and professionalism.
+                    She is deeply committed to understanding the organizations she supports and always adds value.”
+                  </p>
+                  <div class="testimonial-meta">
+                    <strong>Florencia Castagnino, Santiago Lombardi, Ernesto Kern</strong>
+                    <span>Co-founders, Bleett</span>
+                  </div>
+                </article>
 
-              <article class="testimonial-card">
-                <p>
-                  “Working with Vanina was a valuable experience for our company. She helped us recognize and express
-                  the qualities that represent us, while guiding a collective learning process that was key to the project’s success.”
-                </p>
-                <div class="testimonial-meta">
-                  <strong>Laura Contreras</strong>
-                  <span>Planning, project management and evaluation consultant</span>
-                </div>
-              </article>
+                <article class="testimonial-card">
+                  <p>
+                    “Working with Vanina was a valuable experience for our company. She helped us recognize and express
+                    the qualities that represent us, while guiding a collective learning process that was key to the project’s success.”
+                  </p>
+                  <div class="testimonial-meta">
+                    <strong>Laura Contreras</strong>
+                    <span>Planning, project management and evaluation consultant</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="testimonial-controls" aria-label="Testimonial navigation">
+              <button class="testimonial-arrow" type="button" data-testimonial-prev aria-label="Previous testimonial">←</button>
+              <div class="testimonial-dots" data-testimonial-dots></div>
+              <button class="testimonial-arrow" type="button" data-testimonial-next aria-label="Next testimonial">→</button>
             </div>
           </div>
         </div>
@@ -239,98 +247,126 @@
 
     <script>
       (() => {
-        const scroller = document.querySelector("[data-testimonials-scroller]");
+        const carousel = document.querySelector("[data-testimonials-carousel]");
 
-        if (!scroller) {
+        if (!carousel) {
           return;
         }
 
+        const track = carousel.querySelector(".testimonials-track");
+        const slides = Array.from(carousel.querySelectorAll(".testimonial-card"));
+        const previousButton = carousel.querySelector("[data-testimonial-prev]");
+        const nextButton = carousel.querySelector("[data-testimonial-next]");
+        const dotsContainer = carousel.querySelector("[data-testimonial-dots]");
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-        const mobileViewport = window.matchMedia("(max-width: 900px)");
-        let animationFrame;
-        let previousTimestamp = 0;
-        let direction = 1;
+        let currentIndex = 0;
+        let intervalId;
 
-        const stopAutoScroll = () => {
-          if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
-            animationFrame = undefined;
-          }
-          previousTimestamp = 0;
+        if (!track || !slides.length || !previousButton || !nextButton || !dotsContainer) {
+          return;
+        }
+
+        const dots = slides.map((_, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "testimonial-dot";
+          button.setAttribute("aria-label", `Go to testimonial ${index + 1}`);
+          button.addEventListener("click", () => {
+            goToSlide(index);
+          });
+          dotsContainer.appendChild(button);
+          return button;
+        });
+
+        const updateSlider = () => {
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+          slides.forEach((slide, index) => {
+            slide.setAttribute("aria-hidden", index === currentIndex ? "false" : "true");
+          });
+
+          dots.forEach((dot, index) => {
+            const isActive = index === currentIndex;
+            dot.classList.toggle("is-active", isActive);
+            dot.setAttribute("aria-current", isActive ? "true" : "false");
+          });
         };
 
-        const step = (timestamp) => {
-          if (prefersReducedMotion.matches || mobileViewport.matches) {
-            stopAutoScroll();
-            return;
-          }
-
-          const maxScroll = scroller.scrollWidth - scroller.clientWidth;
-
-          if (maxScroll <= 0) {
-            stopAutoScroll();
-            return;
-          }
-
-          if (previousTimestamp) {
-            const delta = timestamp - previousTimestamp;
-            const nextScroll = scroller.scrollLeft + direction * delta * 0.035;
-
-            if (nextScroll >= maxScroll) {
-              scroller.scrollLeft = maxScroll;
-              direction = -1;
-            } else if (nextScroll <= 0) {
-              scroller.scrollLeft = 0;
-              direction = 1;
-            } else {
-              scroller.scrollLeft = nextScroll;
-            }
-          }
-
-          previousTimestamp = timestamp;
-          animationFrame = requestAnimationFrame(step);
+        const goToSlide = (index) => {
+          currentIndex = (index + slides.length) % slides.length;
+          updateSlider();
+          restartAutoPlay();
         };
 
-        const startAutoScroll = () => {
-          if (animationFrame || prefersReducedMotion.matches || mobileViewport.matches) {
-            return;
+        const stopAutoPlay = () => {
+          if (intervalId) {
+            window.clearInterval(intervalId);
+            intervalId = undefined;
           }
-          animationFrame = requestAnimationFrame(step);
         };
 
-        scroller.addEventListener("mouseenter", stopAutoScroll);
-        scroller.addEventListener("mouseleave", startAutoScroll);
-        scroller.addEventListener("focusin", stopAutoScroll);
-        scroller.addEventListener("pointerdown", stopAutoScroll);
+        const startAutoPlay = () => {
+          if (prefersReducedMotion.matches || slides.length < 2) {
+            return;
+          }
+          stopAutoPlay();
+          intervalId = window.setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+          }, 4200);
+        };
 
-        scroller.addEventListener("focusout", () => {
-          if (!scroller.contains(document.activeElement)) {
-            startAutoScroll();
+        const restartAutoPlay = () => {
+          stopAutoPlay();
+          startAutoPlay();
+        };
+
+        previousButton.addEventListener("click", () => {
+          goToSlide(currentIndex - 1);
+        });
+
+        nextButton.addEventListener("click", () => {
+          goToSlide(currentIndex + 1);
+        });
+
+        carousel.addEventListener("mouseenter", stopAutoPlay);
+        carousel.addEventListener("mouseleave", startAutoPlay);
+        carousel.addEventListener("focusin", stopAutoPlay);
+        carousel.addEventListener("focusout", () => {
+          if (!carousel.contains(document.activeElement)) {
+            startAutoPlay();
           }
         });
 
-        scroller.addEventListener("pointerup", startAutoScroll);
-
-        const handleViewportChange = () => {
-          stopAutoScroll();
-          if (mobileViewport.matches) {
-            scroller.scrollLeft = 0;
+        carousel.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            goToSlide(currentIndex - 1);
           }
-          startAutoScroll();
+
+          if (event.key === "ArrowRight") {
+            event.preventDefault();
+            goToSlide(currentIndex + 1);
+          }
+        });
+
+        const handleMotionChange = () => {
+          stopAutoPlay();
+          startAutoPlay();
         };
 
         document.addEventListener("visibilitychange", () => {
           if (document.hidden) {
-            stopAutoScroll();
+            stopAutoPlay();
           } else {
-            startAutoScroll();
+            startAutoPlay();
           }
         });
 
-        prefersReducedMotion.addEventListener("change", handleViewportChange);
-        mobileViewport.addEventListener("change", handleViewportChange);
+        prefersReducedMotion.addEventListener("change", handleMotionChange);
 
-        startAutoScroll();
+        updateSlider();
+        startAutoPlay();
       })();
     </script>
   </body>
