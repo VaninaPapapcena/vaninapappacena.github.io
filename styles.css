@@ -1,16 +1,16 @@
 :root {
-  --bg: #0b1020;
-  --bg-alt: #111a15;
-  --bg-soft: #16231b;
-  --surface: rgba(213, 227, 215, 0.08);
-  --surface-strong: rgba(213, 227, 215, 0.14);
-  --text: #f4f2ea;
-  --muted: #b8c5b7;
-  --accent: #9bb08d;
+  --bg: #f6f4ee;
+  --bg-alt: #edf1ea;
+  --bg-soft: #e5ebe3;
+  --surface: rgba(255, 255, 255, 0.88);
+  --surface-strong: rgba(255, 255, 255, 0.96);
+  --text: #243126;
+  --muted: #647263;
+  --accent: #6f856c;
   --accent-strong: #2c492d;
   --accent-warm: #e09f3e;
-  --border: rgba(213, 227, 215, 0.14);
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+  --border: rgba(44, 73, 45, 0.12);
+  --shadow: 0 18px 40px rgba(30, 44, 32, 0.08);
 }
 
 * {
@@ -24,7 +24,7 @@ html {
 body {
   margin: 0;
   font-family: "Inter", system-ui, sans-serif;
-  background: linear-gradient(180deg, #0f1712 0%, #131d17 100%);
+  background: linear-gradient(180deg, #f8f6f1 0%, #f2f4ee 100%);
   color: var(--text);
   line-height: 1.6;
 }
@@ -52,8 +52,9 @@ body {
 .hero {
   padding-bottom: 4rem;
   background:
-    radial-gradient(circle at top right, rgba(44, 73, 45, 0.34), transparent 28%),
-    radial-gradient(circle at top left, rgba(155, 176, 141, 0.16), transparent 24%);
+    radial-gradient(circle at top right, rgba(44, 73, 45, 0.12), transparent 26%),
+    radial-gradient(circle at top left, rgba(111, 133, 108, 0.1), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 
 .nav {
@@ -88,14 +89,14 @@ body {
   width: 100%;
   height: 100%;
   fill: none;
-  stroke: #d6dfd0;
+  stroke: #2c492d;
   stroke-width: 0.25;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .brand-mark svg .fill {
-  fill: #d6dfd0;
+  fill: #2c492d;
   stroke: none;
 }
 
@@ -131,24 +132,35 @@ h3 {
 }
 
 h1 {
+  font-family: "Newsreader", Georgia, serif;
   font-size: clamp(2.5rem, 7vw, 4.8rem);
-  max-width: 12ch;
+  max-width: 13ch;
+  font-weight: 500;
+  letter-spacing: -0.03em;
 }
 
 h2 {
+  font-family: "Newsreader", Georgia, serif;
   font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
 }
 
 .lead {
   max-width: 58ch;
   color: var(--muted);
-  font-size: 1.1rem;
+  font-size: 1.08rem;
 }
 
 .supporting-copy {
   max-width: 58ch;
   margin: 1rem 0 0;
-  color: #d7ddd0;
+  color: #556353;
 }
 
 .hero-actions,
@@ -172,12 +184,12 @@ h2 {
 
 .button.primary {
   background: var(--accent-strong);
-  color: #f5f1e8;
+  color: #f8f6f1;
   border-color: transparent;
 }
 
 .button.secondary {
-  background: rgba(213, 227, 215, 0.05);
+  background: rgba(255, 255, 255, 0.8);
   color: var(--text);
 }
 
@@ -210,6 +222,7 @@ h2 {
   border: 1px solid var(--border);
   border-radius: 20px;
   box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
 }
 
 .highlights li {
@@ -222,10 +235,10 @@ h2 {
 
 .intro-panel {
   padding: 1.5rem 1.75rem;
-  background: linear-gradient(180deg, rgba(213, 227, 215, 0.08), rgba(213, 227, 215, 0.04));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 244, 238, 0.92));
   border: 1px solid var(--border);
   border-radius: 20px;
-  color: #dde4d8;
+  color: #435140;
   box-shadow: var(--shadow);
 }
 
@@ -305,7 +318,7 @@ h2 {
 
 .work-card a {
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 
 .about-points {
@@ -393,7 +406,7 @@ h2 {
   padding: 1.25rem;
   border-radius: 20px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(213, 227, 215, 0.07), rgba(213, 227, 215, 0.03));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(245, 244, 238, 0.9));
   box-shadow: var(--shadow);
 }
 
@@ -404,7 +417,7 @@ h2 {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: rgba(155, 176, 141, 0.16);
+  background: rgba(111, 133, 108, 0.14);
   color: var(--accent);
   font-weight: 700;
   margin-bottom: 1rem;
@@ -446,6 +459,18 @@ h2 {
 .footer-links a {
   color: var(--text);
   text-decoration: none;
+}
+
+.nav a,
+.button,
+.work-card a,
+.footer-links a {
+  transition: all 0.2s ease;
+}
+
+.nav a:hover,
+.nav a:focus-visible {
+  color: var(--accent-strong);
 }
 
 @media (max-width: 900px) {
