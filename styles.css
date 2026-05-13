@@ -459,6 +459,34 @@ h3 {
   color: var(--muted);
 }
 
+.testimonials-scroller {
+  overflow-x: auto;
+  padding: 0.25rem 0 0.85rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(44, 73, 45, 0.28) transparent;
+}
+
+.testimonials-scroller::-webkit-scrollbar {
+  height: 10px;
+}
+
+.testimonials-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.testimonials-scroller::-webkit-scrollbar-thumb {
+  background: rgba(44, 73, 45, 0.22);
+  border-radius: 999px;
+}
+
+.testimonials-track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  align-items: stretch;
+}
+
 .testimonials-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -477,13 +505,20 @@ h3 {
 }
 
 .testimonial-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 1.5rem;
+  min-height: 17.5rem;
+  flex: 0 0 clamp(18rem, 31vw, 23rem);
   color: var(--muted);
+  scroll-snap-align: start;
 }
 
 .testimonial-card p {
   font-style: italic;
   font-size: 1.05rem;
+  margin: 0;
 }
 
 .testimonial-meta {
@@ -757,6 +792,23 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .nav-links {
+    justify-content: center;
+  }
+
+  .testimonials-track {
+    width: auto;
+  }
+
+  .testimonial-card {
+    flex-basis: min(24rem, calc(100vw - 3rem));
+    min-height: auto;
+  }
+
   .archive-cta {
     align-items: flex-start;
   }
@@ -770,13 +822,25 @@ h3 {
 
 @media (max-width: 640px) {
   body {
-    padding-top: 8.5rem;
+    padding-top: 8.75rem;
+    line-height: 1.55;
   }
 
   .nav {
     flex-direction: column;
     gap: 0.75rem;
     border-radius: 24px;
+    top: 0.5rem;
+    width: min(1120px, calc(100% - 1rem));
+    padding: 0.85rem 1rem;
+  }
+
+  .nav-links {
+    gap: 0.6rem 0.9rem;
+  }
+
+  .nav a {
+    font-size: 0.92rem;
   }
 
   .highlights {
@@ -784,7 +848,66 @@ h3 {
   }
 
   .hero-content {
-    padding-top: 2.5rem;
+    padding-top: 2.25rem;
+    padding-bottom: 1rem;
+  }
+
+  .section {
+    padding: 3.25rem 0;
+  }
+
+  .section-heading {
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    max-width: 11ch;
+    font-size: clamp(2.2rem, 13vw, 3.4rem);
+  }
+
+  h2 {
+    font-size: clamp(1.7rem, 8vw, 2.3rem);
+  }
+
+  h3 {
+    font-size: 1.05rem;
+  }
+
+  .lead,
+  .intro-panel p,
+  .archive-case-body p:last-child,
+  .about-copy,
+  .case-intro,
+  .case-section p,
+  .timeline-meta,
+  .chip {
+    font-size: 0.98rem;
+  }
+
+  .card,
+  .work-card,
+  .timeline-item,
+  .case-summary,
+  .fact-card,
+  .contact-box,
+  .testimonial-card {
+    padding: 1.1rem;
+    border-radius: 14px;
+  }
+
+  .about-layout,
+  .case-hero,
+  .case-layout,
+  .cv-layout {
+    gap: 1.25rem;
+  }
+
+  .testimonial-card {
+    flex-basis: calc(100vw - 2.25rem);
+  }
+
+  .testimonial-card p {
+    font-size: 1rem;
   }
 
   .contact-actions,
