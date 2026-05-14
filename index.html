@@ -159,7 +159,7 @@
             <h2>Testimonials</h2>
           </div>
           <div class="testimonials-carousel" data-testimonials-carousel aria-label="Client testimonials">
-            <div class="testimonials-viewport">
+            <div class="testimonials-viewport" data-testimonials-viewport tabindex="0">
               <div class="testimonials-track">
                 <article class="testimonial-card">
                   <p>
@@ -253,49 +253,79 @@
           return;
         }
 
+        const viewport = carousel.querySelector("[data-testimonials-viewport]");
         const track = carousel.querySelector(".testimonials-track");
         const slides = Array.from(carousel.querySelectorAll(".testimonial-card"));
         const previousButton = carousel.querySelector("[data-testimonial-prev]");
         const nextButton = carousel.querySelector("[data-testimonial-next]");
         const dotsContainer = carousel.querySelector("[data-testimonial-dots]");
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-        let currentIndex = 0;
+        const desktopViewport = window.matchMedia("(min-width: 901px)");
+        let currentPage = 0;
         let intervalId;
+        let scrollFrame;
+        let dots = [];
 
-        if (!track || !slides.length || !previousButton || !nextButton || !dotsContainer) {
+        if (!viewport || !track || !slides.length || !previousButton || !nextButton || !dotsContainer) {
           return;
         }
 
-        const dots = slides.map((_, index) => {
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "testimonial-dot";
-          button.setAttribute("aria-label", `Go to testimonial ${index + 1}`);
-          button.addEventListener("click", () => {
-            goToSlide(index);
+        const getVisibleCount = () => (desktopViewport.matches ? 2 : 1);
+
+        const getPageCount = () => Math.ceil(slides.length / getVisibleCount());
+
+        const getPageStartIndex = (page) => page * getVisibleCount();
+
+        const renderDots = () => {
+          dotsContainer.innerHTML = "";
+          dots = Array.from({ length: getPageCount() }, (_, index) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "testimonial-dot";
+            button.setAttribute("aria-label", `Go to testimonial group ${index + 1}`);
+            button.addEventListener("click", () => {
+              goToPage(index);
+            });
+            dotsContainer.appendChild(button);
+            return button;
           });
-          dotsContainer.appendChild(button);
-          return button;
-        });
+        };
 
         const updateSlider = () => {
-          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+          const pageCount = getPageCount();
+          currentPage = Math.max(0, Math.min(currentPage, pageCount - 1));
 
           slides.forEach((slide, index) => {
-            slide.setAttribute("aria-hidden", index === currentIndex ? "false" : "true");
+            const page = Math.floor(index / getVisibleCount());
+            slide.setAttribute("aria-hidden", page === currentPage ? "false" : "true");
           });
 
           dots.forEach((dot, index) => {
-            const isActive = index === currentIndex;
+            const isActive = index === currentPage;
             dot.classList.toggle("is-active", isActive);
             dot.setAttribute("aria-current", isActive ? "true" : "false");
           });
         };
 
-        const goToSlide = (index) => {
-          currentIndex = (index + slides.length) % slides.length;
+        const goToPage = (page, restart = true) => {
+          const pageCount = getPageCount();
+          currentPage = (page + pageCount) % pageCount;
+          const targetSlide = slides[getPageStartIndex(currentPage)];
+
+          if (!targetSlide) {
+            return;
+          }
+
+          viewport.scrollTo({
+            left: targetSlide.offsetLeft,
+            behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+          });
+
           updateSlider();
-          restartAutoPlay();
+
+          if (restart) {
+            restartAutoPlay();
+          }
         };
 
         const stopAutoPlay = () => {
@@ -306,13 +336,13 @@
         };
 
         const startAutoPlay = () => {
-          if (prefersReducedMotion.matches || slides.length < 2) {
+          if (prefersReducedMotion.matches || getPageCount() < 2) {
             return;
           }
+
           stopAutoPlay();
           intervalId = window.setInterval(() => {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlider();
+            goToPage(currentPage + 1, false);
           }, 4200);
         };
 
@@ -322,11 +352,11 @@
         };
 
         previousButton.addEventListener("click", () => {
-          goToSlide(currentIndex - 1);
+          goToPage(currentPage - 1);
         });
 
         nextButton.addEventListener("click", () => {
-          goToSlide(currentIndex + 1);
+          goToPage(currentPage + 1);
         });
 
         carousel.addEventListener("mouseenter", stopAutoPlay);
@@ -341,17 +371,46 @@
         carousel.addEventListener("keydown", (event) => {
           if (event.key === "ArrowLeft") {
             event.preventDefault();
-            goToSlide(currentIndex - 1);
+            goToPage(currentPage - 1);
           }
 
           if (event.key === "ArrowRight") {
             event.preventDefault();
-            goToSlide(currentIndex + 1);
+            goToPage(currentPage + 1);
           }
+        });
+
+        viewport.addEventListener("scroll", () => {
+          if (scrollFrame) {
+            cancelAnimationFrame(scrollFrame);
+          }
+
+          scrollFrame = requestAnimationFrame(() => {
+            let closestIndex = 0;
+            let closestDistance = Number.POSITIVE_INFINITY;
+
+            slides.forEach((slide, index) => {
+              const distance = Math.abs(slide.offsetLeft - viewport.scrollLeft);
+              if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+              }
+            });
+
+            currentPage = Math.floor(closestIndex / getVisibleCount());
+            updateSlider();
+          });
         });
 
         const handleMotionChange = () => {
           stopAutoPlay();
+          startAutoPlay();
+        };
+
+        const handleViewportChange = () => {
+          renderDots();
+          updateSlider();
+          goToPage(Math.min(currentPage, getPageCount() - 1), false);
           startAutoPlay();
         };
 
@@ -364,8 +423,11 @@
         });
 
         prefersReducedMotion.addEventListener("change", handleMotionChange);
+        desktopViewport.addEventListener("change", handleViewportChange);
 
+        renderDots();
         updateSlider();
+        goToPage(0, false);
         startAutoPlay();
       })();
     </script>
