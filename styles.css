@@ -820,9 +820,9 @@ h3 {
 }
 
 .case-summary h2,
-.case-section h2 {
+/* .case-section h2 {
   max-width: 16ch;
-}
+}*/
 
 .case-summary p,
 .fact-card p,
