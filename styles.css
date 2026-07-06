@@ -828,7 +828,7 @@ h3 {
 .fact-card p,
 .case-intro,
 .case-section p {
-  color: var(--muted);
+  color: var(--text);
 }
 
 .metric-list,
