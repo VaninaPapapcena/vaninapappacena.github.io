@@ -1232,3 +1232,13 @@ h3 {
     font-size: 0.98rem;
   }
 }
+
+/* Corrección para que el título del caso de estudio no se rompa en tantos renglones */
+.case-page .case-hero h1 {
+  max-width: 100%;
+}
+
+/* Ajuste opcional para mejorar el espacio entre el texto y la imagen de portada */
+.case-page .case-hero {
+  gap: 3rem;
+}
