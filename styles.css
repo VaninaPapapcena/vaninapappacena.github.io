@@ -1150,11 +1150,11 @@ h3 {
    Case Text Blocks (Who this is for & Key learning)
    ========================================================================== */
 
-/* Limita el ancho del texto para una lectura cómoda tipo editorial */
+/* Limita el ancho del texto para una lectura cómoda tipo editorial
 .section-alt .container {
   max-width: 800px;
   margin: 0 auto;
-}
+} */
 
 /* Tarjetas de texto plano */
 .case-text-block {
