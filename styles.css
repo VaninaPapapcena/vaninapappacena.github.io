@@ -1233,12 +1233,19 @@ h3 {
   }
 }
 
-/* Corrección para que el título del caso de estudio no se rompa en tantos renglones */
+/* ==========================================================================
+   Ajustes Finales para Casos de Estudio (Ponelo abajo de todo)
+   ========================================================================== */
+
+/* Libera el límite de 13 caracteres solo en las páginas de casos */
 .case-page .case-hero h1 {
   max-width: 100%;
 }
 
-/* Ajuste opcional para mejorar el espacio entre el texto y la imagen de portada */
-.case-page .case-hero {
-  gap: 3rem;
+/* Le da un poco más de aire a la grilla del hero en pantallas grandes */
+@media (min-width: 901px) {
+  .case-page .case-hero {
+    grid-template-columns: 1.2fr 0.8fr; /* El texto gana más espacio que la imagen */
+    gap: 4rem;
+  }
 }
