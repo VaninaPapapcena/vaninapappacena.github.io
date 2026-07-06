@@ -1145,3 +1145,90 @@ h3 {
     justify-content: center;
   }
 }
+
+/* ==========================================================================
+   Case Text Blocks (Who this is for & Key learning)
+   ========================================================================== */
+
+/* Limita el ancho del texto para una lectura cómoda tipo editorial */
+.section-alt .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Tarjetas de texto plano */
+.case-text-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Reset de margen superior para los títulos dentro del bloque */
+.case-text-block h3 {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+/* Estilo para las listas (Who this is for) */
+.case-text-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.case-text-block ul li {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+/* Viñeta sutil y elegante usando tus variables de diseño */
+.case-text-block ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.case-text-block ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* Estilo para los párrafos (Key learning) */
+.case-text-block p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Ajustes específicos para pantallas pequeñas */
+@media (max-width: 640px) {
+  .case-text-block {
+    padding: 1.4rem;
+    border-radius: 14px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .case-text-block h3 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+  
+  .case-text-block p,
+  .case-text-block ul li {
+    font-size: 0.98rem;
+  }
+}
